@@ -73,6 +73,25 @@
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
   </script>
+  <h2>Register for VIP Fan Club</h2>
+  <form id="registerForm">
+      <input type="email" id="email" placeholder="Enter email" required>
+      <input type="password" id="password" placeholder="Enter password" required>
+      <button type="submit">Register</button>
+  </form>
+  
+  <h2>Login to VIP Fan Club</h2>
+  <form id="loginForm">
+      <input type="email" id="loginEmail" placeholder="Enter email" required>
+      <input type="password" id="loginPassword" placeholder="Enter password" required>
+      <button type="submit">Login</button>
+  </form>
+  
+  <h2>Welcome, VIP Fan!</h2>
+  <div id="vipCard" style="display: none;">
+      <p>Your VIP Fan Card:</p>
+      <div id="vipCardDetails"></div>
+  </div>
   <script>
     // Fan Registration
     const registerForm = document.getElementById('registerForm');
@@ -84,12 +103,12 @@
       auth.createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
           const user = userCredential.user;
-          // Add user data to Firestore
+          // Save user data in Firestore
           db.collection("fans").doc(user.uid).set({
             email: user.email,
-            vipStatus: true, // Mark user as VIP automatically
+            vipStatus: true // Automatically set VIP status
           });
-          alert("Welcome, VIP Fan! Your account has been created.");
+          alert("VIP Fan account created! You can now log in.");
         })
         .catch((error) => {
           console.error("Error creating account: ", error.message);
@@ -106,7 +125,7 @@
       auth.signInWithEmailAndPassword(loginEmail, loginPassword)
         .then((userCredential) => {
           const user = userCredential.user;
-          // Retrieve VIP status and display VIP Card
+          // Fetch VIP status from Firestore
           db.collection("fans").doc(user.uid).get().then((doc) => {
             if (doc.exists) {
               const vipCardDiv = document.getElementById('vipCard');
