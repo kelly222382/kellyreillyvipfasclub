@@ -1,141 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Kelly Reilly VIP Fan Club</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #fffbe8;
-            color: #333;
-            text-align: center;
-            padding: 20px;
-            margin: 0;
-        }
-        h1 {
-            color: #ff4081;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        p {
-            font-size: 18px;
-        }
-        .gallery img {
-            width: 300px;
-            margin: 10px;
-            border: 2px solid #ff4081;
-        }
-        footer {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #777;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelly Reilly VIP Fan Club</title>
+  <style>
+    body {
+      background-color: #3b2f2f;
+      font-family: 'Georgia', serif;
+      color: #fff;
+      margin: 0;
+    }
+    header {
+      background-image: url('assets/kelly-reilly.jpg'); /* Real image path */
+      background-size: cover;
+      background-position: center;
+      height: 300px;
+      color: #f5f5f5;
+      text-align: center;
+    }
+    header h1 {
+      padding-top: 100px;
+      font-size: 48px;
+      text-shadow: 2px 2px #000;
+    }
+    .container {
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    h2 {
+      color: #e0b084;
+      text-align: center;
+    }
+    form {
+      background-color: #4f3d3d;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    input, button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #84624b;
+      color: #fff;
+      cursor: pointer;
+    }
+    #vipCard {
+      display: none;
+      background-color: #e0b084;
+      color: #3b2f2f;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+  </style>
 </head>
 <body>
-    <h1>Welcome to the Kelly Reilly VIP Fan Club!</h1>
-    <p>This is a fan page dedicated to Kelly Reilly, featuring her latest projects, news, and media gallery.</p>
 
-    <div class="gallery">
-        <h2>Kelly Reilly Photo Gallery</h2>
-        <img src="https://via.placeholder.com/300" alt="Kelly Reilly 1">
-        <img src="https://via.placeholder.com/300" alt="Kelly Reilly 2">
-        <img src="https://via.placeholder.com/300" alt="Kelly Reilly 3">
-    </div>
+<header>
+  <h1>Kelly Reilly VIP Fan Club</h1>
+</header>
 
-    <footer>
-        <p>&copy; 2024 Kelly Reilly VIP Fan Club. This is a fan-made site and not affiliated with Kelly Reilly.</p>
-    </footer>
-</body>
-</html><script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-analytics.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-  
-    // Your web app's Firebase configuration
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-    const firebaseConfig = {
-      apiKey: "AIzaSyA7-DnI86g40AwNZn8qFV-XxVK4xW6Ymr8",
-      authDomain: "kelly-reilly-vip-fans-club-car.firebaseapp.com",
-      projectId: "kelly-reilly-vip-fans-club-car",
-      storageBucket: "kelly-reilly-vip-fans-club-car.appspot.com",
-      messagingSenderId: "219973941130",
-      appId: "1:219973941130:web:9b93fd1ba6e2960a5d7a73",
-      measurementId: "G-LHLRZZM677"
-    };
-  
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-  </script>
-  <h2>Register for VIP Fan Club</h2>
+<div class="container">
+  <h2>Register for VIP Access</h2>
   <form id="registerForm">
-      <input type="email" id="email" placeholder="Enter email" required>
-      <input type="password" id="password" placeholder="Enter password" required>
-      <button type="submit">Register</button>
+    <input type="email" id="email" placeholder="Enter your email" required><br>
+    <input type="password" id="password" placeholder="Create a password" required><br>
+    <button type="submit">Register</button>
   </form>
-  
-  <h2>Login to VIP Fan Club</h2>
+
+  <h2>Login</h2>
   <form id="loginForm">
-      <input type="email" id="loginEmail" placeholder="Enter email" required>
-      <input type="password" id="loginPassword" placeholder="Enter password" required>
-      <button type="submit">Login</button>
+    <input type="email" id="loginEmail" placeholder="Enter your email" required><br>
+    <input type="password" id="loginPassword" placeholder="Enter your password" required><br>
+    <button type="submit">Login</button>
+  </form>
+
+  <div id="vipCard">
+    <h3>Your VIP Fan Card</h3>
+    <p id="vipDetails"></p>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+<script>
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyA7-DnI86g40AwNZn8qFV-XxVK4xW6Ymr8",
+  authDomain: "kelly-reilly-vip-fans-club-car.firebaseapp.com",
+  projectId: "kelly-reilly-vip-fans-club-car",
+  storageBucket: "kelly-reilly-vip-fans-club-car.appspot.com",
+  messagingSenderId: "219973941130",
+  appId: "1:219973941130:web:9b93fd1ba6e2960a5d7a73",
+  measurementId: "G-LHLRZZM677"
+};
+
+  // Registration Form Handler
+  document.getElementById('registerForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    auth.createUserWithEmailAndPassword(email, password)
+      .then(userCredential => {
+        alert('Registered successfully');
+      })
+      .catch(error => {
+        alert(error.message);
+      });
+  });
+
+  // Login Form Handler
+  document.getElementById('loginForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    auth.signInWithEmailAndPassword(email, password)
+      .then(userCredential => {
+        document.getElementById('vipCard').style.display = 'block';
+        document.getElementById('vipDetails').innerText = Welcome ${email}! VIP Status: Active;
+      })
+      .catch(error => {
+        alert(error.message);
+      });
+  });
+</script>
+
+</body>
+</html><form action="/create-checkout-session" method="POST">
+    <button type="submit" id="checkout-button">Buy VIP Access for $500</button>
   </form>
   
-  <h2>Welcome, VIP Fan!</h2>
-  <div id="vipCard" style="display: none;">
-      <p>Your VIP Fan Card:</p>
-      <div id="vipCardDetails"></div>
-  </div><script>
-    // Fan Registration
-    const registerForm = document.getElementById('registerForm');
-    registerForm.addEventListener('submit', (e) => {
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    document.getElementById('checkout-button').addEventListener('click', function (e) {
       e.preventDefault();
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      
-      auth.createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          // Save user data in Firestore
-          db.collection("fans").doc(user.uid).set({
-            email: user.email,
-            vipStatus: true // Automatically set VIP status
-          });
-          alert("VIP Fan account created! You can now log in.");
-        })
-        .catch((error) => {
-          console.error("Error creating account: ", error.message);
-        });
-    });
-    
-    // Fan Login
-    const loginForm = document.getElementById('loginForm');
-    loginForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const loginEmail = document.getElementById('loginEmail').value;
-      const loginPassword = document.getElementById('loginPassword').value;
-    
-      auth.signInWithEmailAndPassword(loginEmail, loginPassword)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          // Fetch VIP status from Firestore
-          db.collection("fans").doc(user.uid).get().then((doc) => {
-            if (doc.exists) {
-              const vipCardDiv = document.getElementById('vipCard');
-              vipCardDiv.style.display = 'block';
-              document.getElementById('vipCardDetails').innerHTML = `
-                <p>Email: ${doc.data().email}</p>
-                <p>VIP Status: ${doc.data().vipStatus ? 'Active' : 'Inactive'}</p>`;
-            }
-          });
-        })
-        .catch((error) => {
-          console.error("Error logging in: ", error.message);
-        });
-    });
-    </script>
+      fetch('/create-checkout-session', {
+        method: 'POST',
+      })
+      .then(response => response.json())
+      .then(data => {
+        const stripe = Stripe('your-publishable-key');
+        stripe.redirectToCheckout({ sessionId: data.id });
+      });
+    });
+  </script>
